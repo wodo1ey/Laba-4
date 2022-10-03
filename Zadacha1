@@ -1,0 +1,23 @@
+#include "pt4.h"
+#include "iostream"
+#include "fstream"
+using namespace std;
+
+void Solve()
+{
+	Task("TextFile6");
+	int n = 0;
+	int a;
+	fstream f;
+	f.open("b.num");
+	if (f)
+	{
+		while (!f.eof())
+		{
+			f >> a;
+			if (a < 1000 && a >= 100 && a % 2 == 0)
+				n++;
+		}
+	}
+	pt << n;
+}

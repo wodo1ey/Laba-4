@@ -1,0 +1,49 @@
+#include "pt4.h"
+#include "fstream"
+#include <string>
+
+
+using namespace std;
+int n, k;
+int kolvo(int t) {
+    if (t / 10 == 0) return 1;
+    if ((t / 10 >= 1) && (t / 10 < 10)) return 2;
+    if (t / 10 >= 10) return 3;
+}
+
+void cifri(int t, int &t1, int &t2, int &t3) {
+    if (kolvo(t) == 1) t1 = t % 10;
+    else if (kolvo(t) == 2) {
+        t1 = t % 10;
+        t = t / 10;
+        t2 = t % 10;
+    }
+    else if (kolvo(t) == 3) {
+        t1 = t % 10;
+        t = t / 10;
+        t2 = t % 10;
+        t = t / 10;
+        t3 = t % 10;
+    }
+}
+
+void itog() {
+    int t;
+    int a = 0, b = 0, c = 0;
+    int& t1 = a, & t2 = b, & t3 = c;
+    ofstream f;
+    f.open("c.dat");
+    pt >> n >> k;
+    for (int i = 1; i <= n; i++) {
+        int t = i;
+        cifri(t, t1, t2, t3);
+        if (t1 + t2 + t3 == k) f << i << endl;
+    }
+    f.close();
+}
+
+void Solve()
+{
+    Task("TextFile11");
+    itog();
+}
